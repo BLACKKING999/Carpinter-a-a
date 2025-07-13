@@ -3,30 +3,354 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= product.nombre %> - Carpintería</title>
+  <title><%= product.nombre %> - Carpintería Profesional</title>
+  <meta name="description" content="<%= product.descripcion %> - Muebles artesanales de calidad superior">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header class="bg-dark text-white text-center py-4 mb-4">
-    <h1><a href="/" class="text-white text-decoration-none">Carpintería Profesional</a></h1>
-  </header>
-  <main class="container mb-5">
-    <section class="row justify-content-center">
-      <div class="col-12 col-md-6 mb-4">
-        <img src="/images/<%= product.imagen %>" class="img-fluid rounded shadow" alt="<%= product.nombre %>">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolled" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-hammer"></i>
+        <span>Carpintería Pro</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#productos">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#contacto">Contacto</a>
+          </li>
+        </ul>
       </div>
-      <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
-        <h2><%= product.nombre %></h2>
-        <p class="h4 text-success fw-bold"><%= product.precio %></p>
-        <p><%= product.descripcion %></p>
-        <a class="btn btn-success btn-lg mt-3" href="https://wa.me/593990383389?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20<%= encodeURIComponent(product.nombre) %>" target="_blank">Comprar por WhatsApp</a>
+    </div>
+  </nav>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail-section">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="product-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= product.nombre %></li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <!-- Product Image -->
+        <div class="col-lg-6 col-md-12">
+          <div class="product-image-container">
+            <div class="product-image-main">
+              <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-fluid product-main-image">
+              <div class="image-zoom-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Click para ampliar</span>
+              </div>
+            </div>
+            <!-- Galería de thumbnails (puedes agregar más imágenes aquí) -->
+            <div class="product-thumbnails">
+              <div class="thumbnail active">
+                <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>">
+              </div>
+              <!-- Agregar más thumbnails aquí cuando tengas más imágenes -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6 col-md-12">
+          <div class="product-info-container">
+            <h1 class="product-title"><%= product.nombre %></h1>
+            
+            <div class="product-rating">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text">(4.9/5) 127 reseñas</span>
+            </div>
+
+            <div class="product-price">
+              <span class="current-price"><%= product.precio %></span>
+              <span class="price-note">Precio base - Personalización disponible</span>
+            </div>
+
+            <div class="product-description">
+              <h3>Descripción</h3>
+              <p><%= product.descripcion %></p>
+              <ul class="product-features">
+                <li><i class="fas fa-check"></i> Madera de primera calidad</li>
+                <li><i class="fas fa-check"></i> Acabado profesional</li>
+                <li><i class="fas fa-check"></i> Diseño personalizable</li>
+                <li><i class="fas fa-check"></i> Garantía de por vida</li>
+              </ul>
+            </div>
+
+            <div class="product-specifications">
+              <h3>Especificaciones</h3>
+              <div class="specs-grid">
+                <div class="spec-item">
+                  <span class="spec-label">Material:</span>
+                  <span class="spec-value">Madera de Pino</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Acabado:</span>
+                  <span class="spec-value">Barniz Natural</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Garantía:</span>
+                  <span class="spec-value">De por vida</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Entrega:</span>
+                  <span class="spec-value">2-3 semanas</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <div class="quantity-selector">
+                <label for="quantity">Cantidad:</label>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity(-1)">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <input type="number" id="quantity" value="1" min="1" max="10">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity(1)">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="action-buttons">
+                <a class="btn btn-primary btn-lg whatsapp-btn" 
+                   href="https://wa.me/593990383389?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20<%= encodeURIComponent(product.nombre) %>" 
+                   target="_blank">
+                  <i class="fab fa-whatsapp"></i>
+                  Comprar por WhatsApp
+                </a>
+                <button class="btn btn-outline-primary btn-lg" onclick="addToFavorites()">
+                  <i class="far fa-heart"></i>
+                  Favoritos
+                </button>
+              </div>
+            </div>
+
+            <div class="product-guarantees">
+              <div class="guarantee-item">
+                <i class="fas fa-shipping-fast"></i>
+                <div>
+                  <h4>Envío Gratis</h4>
+                  <p>En toda la ciudad de Guayaquil</p>
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <i class="fas fa-undo-alt"></i>
+                <div>
+                  <h4>Garantía Total</h4>
+                  <p>Satisfacción 100% garantizada</p>
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <i class="fas fa-tools"></i>
+                <div>
+                  <h4>Instalación</h4>
+                  <p>Servicio de instalación incluido</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
-  <footer class="bg-dark text-white text-center py-3 fixed-bottom">
-    <p class="mb-0">&copy; <%= new Date().getFullYear() %> Carpintería Profesional</p>
+    </div>
+  </section>
+
+  <!-- Related Products Section -->
+  <section class="related-products-section">
+    <div class="container">
+      <h2 class="section-title">Productos Relacionados</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="related-product-card">
+            <div class="related-product-image">
+              <img src="/images/mesa1.jpg" alt="Mesa de Roble">
+            </div>
+            <div class="related-product-info">
+              <h3>Mesa de Roble</h3>
+              <p class="related-product-price">$150</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="related-product-card">
+            <div class="related-product-image">
+              <img src="/images/silla1.jpg" alt="Silla Ergonómica">
+            </div>
+            <div class="related-product-info">
+              <h3>Silla Ergonómica</h3>
+              <p class="related-product-price">$65</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="related-product-card">
+            <div class="related-product-image">
+              <img src="/images/estante1.jpg" alt="Estante Premium">
+            </div>
+            <div class="related-product-info">
+              <h3>Estante Premium</h3>
+              <p class="related-product-price">$95</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Carpintería Pro</h3>
+          <p>Creando muebles únicos desde 2004</p>
+        </div>
+        <div class="footer-links">
+          <a href="/#inicio">Inicio</a>
+          <a href="/#productos">Productos</a>
+          <a href="/#nosotros">Nosotros</a>
+          <a href="/#contacto">Contacto</a>
+        </div>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <%= new Date().getFullYear() %> Carpintería Profesional. Todos los derechos reservados.</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- Image Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModalLabel"><%= product.nombre %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script src="/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
+  <script>
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Quantity controls
+    function changeQuantity(change) {
+      const quantityInput = document.getElementById('quantity');
+      const currentValue = parseInt(quantityInput.value);
+      const newValue = currentValue + change;
+      
+      if (newValue >= 1 && newValue <= 10) {
+        quantityInput.value = newValue;
+      }
+    }
+
+    // Add to favorites
+    function addToFavorites() {
+      const btn = event.target.closest('button');
+      const icon = btn.querySelector('i');
+      
+      if (icon.classList.contains('far')) {
+        icon.classList.remove('far');
+        icon.classList.add('fas');
+        btn.classList.add('favorited');
+      } else {
+        icon.classList.remove('fas');
+        icon.classList.add('far');
+        btn.classList.remove('favorited');
+      }
+    }
+
+    // Image zoom functionality
+    document.querySelector('.product-main-image').addEventListener('click', function() {
+      const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+      modal.show();
+    });
+
+    // Smooth animations on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.product-info-container, .related-product-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Add animation classes
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.querySelector('.product-image-container').classList.add('animate-in');
+        document.querySelector('.product-info-container').classList.add('animate-in');
+      }, 100);
+    });
+  </script>
 </body>
-</html> 
+</html>
