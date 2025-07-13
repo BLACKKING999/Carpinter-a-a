@@ -449,6 +449,7 @@ body {
   padding: 120px 0;
   background: white;
   position: relative;
+  min-height: 600px;
 }
 
 .section-header {
@@ -486,9 +487,9 @@ body {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .product-card {
@@ -498,12 +499,12 @@ body {
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
   position: relative;
-  border: 1px solid #f0f0f0;
-  group: hover;
+  border: 2px solid #f0f0f0;
+  min-height: 400px;
 }
 
 .product-card:hover {
-  transform: translateY(-12px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
   border-color: var(--primary-color);
 }
@@ -511,7 +512,8 @@ body {
 .product-image {
   position: relative;
   overflow: hidden;
-  height: 280px;
+  height: 250px;
+  background: #f8f9fa;
 }
 
 .product-image img {
@@ -521,56 +523,12 @@ body {
   transition: var(--transition);
 }
 
-.product-card:hover .product-image img {
-  transform: scale(1.15);
-}
-
-.product-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.9) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.product-card:hover .product-overlay {
-  opacity: 1;
-}
-
-.product-btn {
-  padding: 1rem 2rem;
-  background: white;
-  color: var(--primary-color);
-  border: none;
-  border-radius: var(--border-radius);
-  font-weight: 700;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow-md);
-  font-size: 1.1rem;
-}
-
-.product-btn:hover {
-  transform: scale(1.1);
-  color: var(--primary-color);
-  box-shadow: var(--shadow-lg);
-}
-
 .product-info {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .product-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-dark);
   margin-bottom: 0.8rem;
@@ -580,18 +538,15 @@ body {
 .product-description {
   color: var(--text-muted);
   font-size: 1rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .product-price {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  color: var(--primary-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* EPIC ABOUT SECTION */
@@ -951,10 +906,11 @@ body {
   .products-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+    max-width: 400px;
+    margin: 2rem auto 0;
   }
 
   .product-card {
-    max-width: 450px;
     margin: 0 auto;
   }
 
@@ -1072,11 +1028,69 @@ body {
   .navbar-collapse {
     background: rgba(26, 26, 26, 0.98);
     backdrop-filter: blur(30px);
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     border-radius: var(--border-radius);
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: var(--shadow-xl);
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    right: 15px;
+    z-index: 1000;
   }
 
   .navbar-nav .nav-link {
-    padding: 1rem 1.
+    padding: 1rem 1.5rem !important;
+    margin: 0.3rem 0;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    text-align: center;
+    display: block;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background: var(--primary-color);
+    color: white !important;
+  }
+}
+
+/* RESPONSIVE PRODUCTS */
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 400px;
+    margin: 2rem auto 0;
+  }
+
+  .product-card {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .products-grid {
+    max-width: 320px;
+    gap: 1.5rem;
+  }
+
+  .product-image {
+    height: 200px;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .product-name {
+    font-size: 1.2rem;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+  }
+}
+
+/* EPIC BUTTON IMPROVEMENTS */
+.btn-primary {
+  background: var(--gradient-pri
