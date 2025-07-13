@@ -1,18 +1,21 @@
 {
   "name": "proyecto-t",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "keywords": [],
+  "keywords": ["carpinteria", "muebles", "artesanal"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Sitio web de carpintería profesional",
   "dependencies": {
     "bootstrap": "^5.3.7",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
