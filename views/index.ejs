@@ -108,49 +108,57 @@
   </section>
 
   <!-- Products Section -->
-  <section id="productos" class="products-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Nuestros Productos</h2>
-        <p class="section-subtitle">Descubre nuestra colección de muebles artesanales únicos</p>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <% if (products && products.length > 0) { %>
-            <div class="products-grid">
-              <% products.forEach((product, index) => { %>
-                <div class="product-card" data-aos="fade-up" data-aos-delay="<%= index * 150 %>">
-                  <div class="product-image">
-                    <img src="/images/<%= product.imagen %>" 
-                         alt="<%= product.nombre %>" 
-                         loading="lazy"
-                         onerror="this.src='/placeholder.svg?height=280&width=350&text=<%= encodeURIComponent(product.nombre) %>'">
-                    <div class="product-overlay">
-                      <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
-                        <i class="fas fa-eye"></i>
-                        Ver Detalles
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-info">
-                    <h3 class="product-name"><%= product.nombre %></h3>
-                    <p class="product-description"><%= product.descripcion %></p>
-                    <div class="product-price"><%= product.precio %></div>
-                  </div>
-                </div>
-              <% }) %>
-            </div>
-          <% } else { %>
-            <div class="text-center py-5">
-              <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
-              <h3>No hay productos disponibles</h3>
-              <p class="text-muted">Pronto agregaremos nuevos productos increíbles.</p>
-            </div>
-          <% } %>
-        </div>
+<section id="productos" class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Productos</h2>
+      <p class="section-subtitle">Descubre nuestra colección de muebles artesanales únicos</p>
+    </div>
+    
+    <!-- DEBUG: Mostrar información de productos -->
+    <div class="row">
+      <div class="col-12">
+        <p>Productos encontrados: <%= products ? products.length : 0 %></p>
       </div>
     </div>
-  </section>
+    
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <% if (typeof products !== 'undefined' && products && products.length > 0) { %>
+          <div class="products-grid">
+            <% products.forEach(function(product, index) { %>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="https://via.placeholder.com/350x280/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>" 
+                       alt="<%= product.nombre %>" 
+                       loading="lazy">
+                  <div class="product-overlay">
+                    <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
+                      <i class="fas fa-eye"></i>
+                      Ver Detalles
+                    </a>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-name"><%= product.nombre %></h3>
+                  <p class="product-description"><%= product.descripcion %></p>
+                  <div class="product-price"><%= product.precio %></div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <div class="text-center py-5">
+            <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+            <h3>No hay productos disponibles</h3>
+            <p class="text-muted">Los productos no se pudieron cargar.</p>
+            <p class="text-muted">Productos variable: <%= typeof products %></p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- About Section -->
   <section id="nosotros" class="about-section">
@@ -287,88 +295,78 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+<script src="/bootstrap.bundle.min.js"></script>
+<script>
+  // Función para cerrar el menú móvil
+  function closeNavbar() {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbar = document.querySelector('.navbar-collapse');
+    
+    if (navbar && navbar.classList.contains('show')) {
+      const bsCollapse = new bootstrap.Collapse(navbar, {
+        toggle: false
+      });
+      bsCollapse.hide();
     }
+  }
 
-    requestAnimationFrame(raf);
-
-    // Cerrar menú móvil al hacer clic en un enlace
-    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-      link.addEventListener('click', function() {
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-          toggle: false
-        });
-        bsCollapse.hide();
+  // Cerrar menú al hacer clic en cualquier enlace de navegación
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        // Cerrar el menú después de un pequeño delay
+        setTimeout(closeNavbar, 100);
       });
     });
 
-    // Initialize AOS
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('mainNav');
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          lenis.scrollTo(target, {
-            offset: -80,
-            duration: 1.5
-          });
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(e) {
+      const navbar = document.querySelector('.navbar-collapse');
+      const toggler = document.querySelector('.navbar-toggler');
+      
+      if (navbar && navbar.classList.contains('show')) {
+        if (!navbar.contains(e.target) && !toggler.contains(e.target)) {
+          closeNavbar();
         }
-      });
-    });
-
-    // Parallax effect for hero section
-    window.addEventListener('scroll', function() {
-      const scrolled = window.pageYOffset;
-      const parallax = document.querySelector('.hero-bg');
-      const speed = scrolled * 0.5;
-      if (parallax) {
-        parallax.style.transform = `translateY(${speed}px)`;
       }
     });
+  });
 
-    // Contact form submission
-    document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Contact form submission
+  const contactForm = document.querySelector('.contact-form form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
     });
-  </script>
+  }
+</script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 </body>
 </html>
