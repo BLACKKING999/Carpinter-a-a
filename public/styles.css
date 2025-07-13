@@ -1,0 +1,163 @@
+:root {
+  --color-rojo: #e50914; /* Rojo brillante */
+  --color-rojo-oscuro: #b00610;
+  --color-negro-mate: #232323;
+  --color-blanco: #fff;
+  --color-gris-suave: #f7f7f7;
+  --color-texto: #fff;
+  --color-texto-secundario: #e0e0e0;
+  --sombra: 0 4px 24px rgba(229,9,20,0.08);
+  --transicion: 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  background: var(--color-gris-suave);
+  color: var(--color-negro-mate);
+}
+
+header, footer {
+  background: var(--color-negro-mate) !important;
+  color: var(--color-blanco) !important;
+}
+
+header h1, header a, footer a {
+  color: var(--color-rojo) !important;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.15);
+}
+
+footer {
+  font-size: 1rem;
+  border-top: 2px solid var(--color-rojo);
+}
+
+main {
+  padding: 2rem 1rem 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  background: var(--color-blanco);
+  overflow: hidden;
+  position: relative;
+  min-height: 350px;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(229,9,20,0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+.card-img-top {
+  border-radius: 0 0 12px 12px;
+  height: 180px;
+  object-fit: cover;
+  transition: filter var(--transicion);
+}
+.card:hover .card-img-top {
+  filter: brightness(0.95) saturate(1.2);
+}
+.card-title {
+  color: var(--color-rojo);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.card-text {
+  color: var(--color-negro-mate);
+  font-size: 1.1rem;
+}
+.btn-primary, .btn-success {
+  background: var(--color-rojo);
+  border: none;
+  color: var(--color-blanco);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(229,9,20,0.10);
+  transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+}
+.btn-primary:hover, .btn-success:hover {
+  background: var(--color-rojo-oscuro);
+  box-shadow: 0 4px 16px rgba(229,9,20,0.18);
+  transform: scale(1.05);
+}
+.btn-success {
+  background: var(--color-rojo);
+}
+.btn-success:hover {
+  background: var(--color-rojo-oscuro);
+}
+
+/* Animaciones de entrada */
+.card, .detalle-producto, .img-fluid, .btn {
+  animation: fadeInUp 0.7s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Página de detalle */
+.detalle-producto h2 {
+  color: var(--color-rojo);
+  font-weight: 700;
+}
+.detalle-producto .h4 {
+  color: var(--color-rojo);
+}
+.detalle-producto p {
+  color: var(--color-negro-mate);
+}
+
+/* WhatsApp button personalizado */
+.btn-whatsapp, .btn.btn-success {
+  background: linear-gradient(90deg, var(--color-rojo) 60%, #25d366 100%);
+  color: var(--color-blanco);
+  border: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+}
+.btn-whatsapp:hover, .btn.btn-success:hover {
+  background: linear-gradient(90deg, var(--color-rojo-oscuro) 60%, #128c7e 100%);
+  color: var(--color-blanco);
+  box-shadow: 0 4px 16px rgba(229,9,20,0.18);
+  transform: scale(1.05);
+}
+
+/* Ajustes responsivos extra */
+@media (max-width: 800px) {
+  main {
+    padding: 1rem 0.2rem 5rem 0.2rem;
+  }
+  .card-img-top {
+    height: 120px;
+  }
+  .detalle-producto img {
+    width: 100%;
+    height: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .detalle-producto h2 {
+    font-size: 1.2rem;
+  }
+} 

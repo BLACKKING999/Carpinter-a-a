@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= product.nombre %> - Carpintería</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+</head>
+<body>
+  <header class="bg-dark text-white text-center py-4 mb-4">
+    <h1><a href="/" class="text-white text-decoration-none">Carpintería Profesional</a></h1>
+  </header>
+  <main class="container mb-5">
+    <section class="row justify-content-center">
+      <div class="col-12 col-md-6 mb-4">
+        <img src="/images/<%= product.imagen %>" class="img-fluid rounded shadow" alt="<%= product.nombre %>">
+      </div>
+      <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+        <h2><%= product.nombre %></h2>
+        <p class="h4 text-success fw-bold"><%= product.precio %></p>
+        <p><%= product.descripcion %></p>
+        <a class="btn btn-success btn-lg mt-3" href="https://wa.me/593990383389?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20<%= encodeURIComponent(product.nombre) %>" target="_blank">Comprar por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-dark text-white text-center py-3 fixed-bottom">
+    <p class="mb-0">&copy; <%= new Date().getFullYear() %> Carpintería Profesional</p>
+  </footer>
+  <script src="/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Mesa de Madera",
+    "imagen": "mesa1.jpg",
+    "descripcion": "Mesa robusta de madera de pino, ideal para comedor.",
+    "precio": "$120"
+  },
+  {
+    "id": 2,
+    "nombre": "Silla Clásica",
+    "imagen": "silla1.jpg",
+    "descripcion": "Silla cómoda y elegante, perfecta para cualquier ambiente.",
+    "precio": "$45"
+  },
+  {
+    "id": 3,
+    "nombre": "Estante Moderno",
+    "imagen": "estante1.jpg",
+    "descripcion": "Estante de diseño moderno para sala o estudio.",
+    "precio": "$80"
+  }
+] 
