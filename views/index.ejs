@@ -3,34 +3,340 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carpintería - Productos</title>
+  <title>Carpintería Profesional - Muebles Artesanales de Calidad</title>
+  <meta name="description" content="Carpintería profesional especializada en muebles artesanales de madera. Diseños únicos, calidad superior y atención personalizada.">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header class="bg-dark text-white text-center py-4 mb-4">
-    <h1>Carpintería Profesional</h1>
-    <p class="lead">Productos destacados</p>
-  </header>
-  <main class="container mb-5">
-    <section class="row justify-content-center">
-      <% products.forEach(product => { %>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-          <div class="card h-100 shadow-sm">
-            <img src="/images/<%= product.imagen %>" class="card-img-top" alt="<%= product.nombre %>">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title"><%= product.nombre %></h5>
-              <p class="card-text text-success fw-bold"><%= product.precio %></p>
-              <a href="/producto/<%= product.id %>" class="btn btn-primary mt-auto">Ver detalles</a>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-hammer"></i>
+        <span>Carpintería Pro</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#productos">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contacto">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-subtitle">Creamos</span>
+          <span class="hero-main-text">Muebles Únicos</span>
+          <span class="hero-subtitle">Con Pasión y Maestría</span>
+        </h1>
+        <p class="hero-description">
+          Transformamos la madera en obras de arte funcionales. Cada pieza es única, 
+          diseñada especialmente para tu hogar con la más alta calidad artesanal.
+        </p>
+        <div class="hero-buttons">
+          <a href="#productos" class="btn btn-primary btn-lg hero-btn">
+            <i class="fas fa-eye"></i>
+            Ver Productos
+          </a>
+          <a href="#contacto" class="btn btn-outline-light btn-lg hero-btn">
+            <i class="fas fa-phone"></i>
+            Contactar
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-hand-sparkles"></i>
+            </div>
+            <h3>Artesanía Tradicional</h3>
+            <p>Técnicas ancestrales combinadas con herramientas modernas para crear piezas excepcionales.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3>Materiales Selectos</h3>
+            <p>Utilizamos maderas de la más alta calidad, cuidadosamente seleccionadas y tratadas.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-check"></i>
+            </div>
+            <h3>Diseño Personalizado</h3>
+            <p>Cada mueble se adapta perfectamente a tus necesidades y al estilo de tu hogar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="productos" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <p class="section-subtitle">Descubre nuestra colección de muebles artesanales</p>
+      </div>
+      <div class="products-grid">
+        <% products.forEach((product, index) => { %>
+          <div class="product-card" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+            <div class="product-image">
+              <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>">
+              <div class="product-overlay">
+                <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
+                  <i class="fas fa-eye"></i>
+                  Ver Detalles
+                </a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name"><%= product.nombre %></h3>
+              <p class="product-description"><%= product.descripcion %></p>
+              <div class="product-price"><%= product.precio %></div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="nosotros" class="about-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="about-content">
+            <h2 class="section-title">Maestros en Carpintería</h2>
+            <p class="about-text">
+              Con más de 20 años de experiencia, somos una familia de artesanos dedicados a crear 
+              muebles únicos que combinan tradición y modernidad. Cada pieza cuenta una historia 
+              y refleja nuestro compromiso con la excelencia.
+            </p>
+            <div class="about-stats">
+              <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Proyectos Realizados</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Años de Experiencia</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfacción Garantizada</div>
+              </div>
             </div>
           </div>
         </div>
-      <% }) %>
-    </section>
-  </main>
-  <footer class="bg-dark text-white text-center py-3 fixed-bottom">
-    <p class="mb-0">&copy; <%= new Date().getFullYear() %> Carpintería Profesional</p>
+        <div class="col-lg-6">
+          <div class="about-image">
+            <img src="/images/taller.jpg" alt="Taller de Carpintería" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="contact-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Contáctanos</h2>
+        <p class="section-subtitle">Estamos aquí para hacer realidad tu proyecto</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h4>Ubicación</h4>
+              <p>Guayaquil, Ecuador</p>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h4>Teléfono</h4>
+              <p>+593 99 038 3389</p>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h4>Email</h4>
+              <p>info@carpinteriapro.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="contact-form">
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Asunto" required>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="5" placeholder="Mensaje" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-paper-plane"></i>
+                Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Carpintería Pro</h3>
+          <p>Creando muebles únicos desde 2004</p>
+        </div>
+        <div class="footer-links">
+          <a href="#inicio">Inicio</a>
+          <a href="#productos">Productos</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <%= new Date().getFullYear() %> Carpintería Profesional. Todos los derechos reservados.</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- Scripts -->
   <script src="/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('mainNav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          lenis.scrollTo(target, {
+            offset: -80,
+            duration: 1.5
+          });
+        }
+      });
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelector('.hero-bg');
+      const speed = scrolled * 0.5;
+      if (parallax) {
+        parallax.style.transform = `translateY(${speed}px)`;
+      }
+    });
+
+    // Contact form submission
+    document.querySelector('.contact-form form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+    });
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 </body>
-</html> 
+</html>
