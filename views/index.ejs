@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Carpintería Profesional - Muebles Artesanales de Calidad</title>
   <meta name="description" content="Carpintería profesional especializada en muebles artesanales de madera. Diseños únicos, calidad superior y atención personalizada.">
   <link rel="stylesheet" href="/styles.css">
@@ -112,27 +112,42 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Nuestros Productos</h2>
-        <p class="section-subtitle">Descubre nuestra colección de muebles artesanales</p>
+        <p class="section-subtitle">Descubre nuestra colección de muebles artesanales únicos</p>
       </div>
-      <div class="products-grid">
-        <% products.forEach((product, index) => { %>
-          <div class="product-card" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
-            <div class="product-image">
-              <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>">
-              <div class="product-overlay">
-                <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
-                  <i class="fas fa-eye"></i>
-                  Ver Detalles
-                </a>
-              </div>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <% if (products && products.length > 0) { %>
+            <div class="products-grid">
+              <% products.forEach((product, index) => { %>
+                <div class="product-card" data-aos="fade-up" data-aos-delay="<%= index * 150 %>">
+                  <div class="product-image">
+                    <img src="/images/<%= product.imagen %>" 
+                         alt="<%= product.nombre %>" 
+                         loading="lazy"
+                         onerror="this.src='/placeholder.svg?height=280&width=350&text=<%= encodeURIComponent(product.nombre) %>'">
+                    <div class="product-overlay">
+                      <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
+                        <i class="fas fa-eye"></i>
+                        Ver Detalles
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-info">
+                    <h3 class="product-name"><%= product.nombre %></h3>
+                    <p class="product-description"><%= product.descripcion %></p>
+                    <div class="product-price"><%= product.precio %></div>
+                  </div>
+                </div>
+              <% }) %>
             </div>
-            <div class="product-info">
-              <h3 class="product-name"><%= product.nombre %></h3>
-              <p class="product-description"><%= product.descripcion %></p>
-              <div class="product-price"><%= product.precio %></div>
+          <% } else { %>
+            <div class="text-center py-5">
+              <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+              <h3>No hay productos disponibles</h3>
+              <p class="text-muted">Pronto agregaremos nuevos productos increíbles.</p>
             </div>
-          </div>
-        <% }) %>
+          <% } %>
+        </div>
       </div>
     </div>
   </section>
@@ -182,41 +197,47 @@
         <p class="section-subtitle">Estamos aquí para hacer realidad tu proyecto</p>
       </div>
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-12">
           <div class="contact-info">
             <div class="contact-item">
               <div class="contact-icon">
                 <i class="fas fa-map-marker-alt"></i>
               </div>
-              <h4>Ubicación</h4>
-              <p>Guayaquil, Ecuador</p>
+              <div>
+                <h4>Ubicación</h4>
+                <p>Guayaquil, Ecuador</p>
+              </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">
                 <i class="fas fa-phone"></i>
               </div>
-              <h4>Teléfono</h4>
-              <p>+593 99 038 3389</p>
+              <div>
+                <h4>Teléfono</h4>
+                <p>+593 99 038 3389</p>
+              </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">
                 <i class="fas fa-envelope"></i>
               </div>
-              <h4>Email</h4>
-              <p>info@carpinteriapro.com</p>
+              <div>
+                <h4>Email</h4>
+                <p>info@carpinteriapro.com</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-md-12">
           <div class="contact-form">
             <form>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Nombre" required>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-12">
                   <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email" required>
                   </div>
