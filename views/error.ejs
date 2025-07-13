@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error - Carpintería Profesional</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolled">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-hammer"></i>
+        <span>Carpintería Pro</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Error Section -->
+  <section style="padding: 150px 0; min-height: 100vh; display: flex; align-items: center;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+          <div style="font-size: 6rem; color: var(--primary-color); margin-bottom: 2rem;">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h1 style="font-size: 3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem;">
+            Error <%= error.status %>
+          </h1>
+          <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem;">
+            <%= message %>
+          </p>
+          <a href="/" class="btn btn-primary btn-lg">
+            <i class="fas fa-home"></i>
+            Volver al Inicio
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
