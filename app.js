@@ -51,11 +51,22 @@ function getProducts() {
 app.get("/", (req, res) => {
   try {
     const products = getProducts()
-    console.log("Enviando productos a la vista:", products)
-    res.render("index", { products })
+    console.log("=== DEBUG INFO ===")
+    console.log("Productos encontrados:", products.length)
+    console.log("Primer producto:", products[0])
+    console.log("Tipo de products:", typeof products)
+    console.log("Es array:", Array.isArray(products))
+
+    res.render("index", {
+      products: products,
+      title: "Carpintería Profesional",
+    })
   } catch (error) {
     console.error("Error en ruta principal:", error)
-    res.render("index", { products: [] })
+    res.render("index", {
+      products: [],
+      title: "Carpintería Profesional",
+    })
   }
 })
 
