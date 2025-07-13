@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title><%= product.nombre %> - Carpintería Profesional</title>
   <meta name="description" content="<%= product.descripcion %> - Muebles artesanales de calidad superior">
   <link rel="stylesheet" href="/styles.css">
@@ -56,7 +56,10 @@
         <div class="col-lg-6 col-md-12">
           <div class="product-image-container">
             <div class="product-image-main">
-              <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-fluid product-main-image">
+              <img src="/images/<%= product.imagen %>" 
+                   alt="<%= product.nombre %>" 
+                   class="img-fluid product-main-image"
+                   onerror="this.src='https://via.placeholder.com/600x450/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>'">
               <div class="image-zoom-overlay">
                 <i class="fas fa-search-plus"></i>
                 <span>Click para ampliar</span>
@@ -65,9 +68,14 @@
             <!-- Galería de thumbnails (puedes agregar más imágenes aquí) -->
             <div class="product-thumbnails">
               <div class="thumbnail active">
-                <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>">
+                <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>"
+                     onerror="this.src='https://via.placeholder.com/100x80/dc2626/ffffff?text=Thumb'">
               </div>
               <!-- Agregar más thumbnails aquí cuando tengas más imágenes -->
+              <!-- Ejemplo de thumbnail adicional: -->
+              <!-- <div class="thumbnail">
+                <img src="/images/silla2.jpg" alt="Silla Clásica Vista 2">
+              </div> -->
             </div>
           </div>
         </div>
@@ -83,7 +91,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
               </div>
               <span class="rating-text">(4.9/5) 127 reseñas</span>
             </div>
@@ -128,7 +136,7 @@
 
             <div class="product-actions">
               <div class="quantity-selector">
-                <label for="quantity">Cantidad:</label>
+                <label for="quantity" class="quantity-label">Cantidad:</label>
                 <div class="quantity-controls">
                   <button type="button" class="quantity-btn" onclick="changeQuantity(-1)">
                     <i class="fas fa-minus"></i>
@@ -147,7 +155,7 @@
                   <i class="fab fa-whatsapp"></i>
                   Comprar por WhatsApp
                 </a>
-                <button class="btn btn-outline-primary btn-lg" onclick="addToFavorites()">
+                <button class="btn btn-outline-primary btn-lg" onclick="addToFavorites(this)">
                   <i class="far fa-heart"></i>
                   Favoritos
                 </button>
@@ -187,40 +195,43 @@
   <section class="related-products-section">
     <div class="container">
       <h2 class="section-title">Productos Relacionados</h2>
-      <div class="row">
-        <div class="col-md-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-10 mb-4">
           <div class="related-product-card">
             <div class="related-product-image">
-              <img src="/images/mesa1.jpg" alt="Mesa de Roble">
+              <img src="/images/mesa1.jpg" alt="Mesa de Roble" loading="lazy"
+                   onerror="this.src='https://via.placeholder.com/220x180/dc2626/ffffff?text=Mesa'">
             </div>
             <div class="related-product-info">
               <h3>Mesa de Roble</h3>
               <p class="related-product-price">$150</p>
-              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+              <a href="/producto/1" class="btn btn-sm btn-outline-primary">Ver Producto</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-10 mb-4">
           <div class="related-product-card">
             <div class="related-product-image">
-              <img src="/images/silla1.jpg" alt="Silla Ergonómica">
+              <img src="/images/silla1.jpg" alt="Silla Ergonómica" loading="lazy"
+                   onerror="this.src='https://via.placeholder.com/220x180/dc2626/ffffff?text=Silla'">
             </div>
             <div class="related-product-info">
               <h3>Silla Ergonómica</h3>
               <p class="related-product-price">$65</p>
-              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+              <a href="/producto/2" class="btn btn-sm btn-outline-primary">Ver Producto</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-10 mb-4">
           <div class="related-product-card">
             <div class="related-product-image">
-              <img src="/images/estante1.jpg" alt="Estante Premium">
+              <img src="/images/estante1.jpg" alt="Estante Premium" loading="lazy"
+                   onerror="this.src='https://via.placeholder.com/220x180/dc2626/ffffff?text=Estante'">
             </div>
             <div class="related-product-info">
               <h3>Estante Premium</h3>
               <p class="related-product-price">$95</p>
-              <a href="#" class="btn btn-sm btn-outline-primary">Ver Producto</a>
+              <a href="/producto/3" class="btn btn-sm btn-outline-primary">Ver Producto</a>
             </div>
           </div>
         </div>
@@ -262,8 +273,9 @@
           <h5 class="modal-title" id="imageModalLabel"><%= product.nombre %></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-fluid">
+        <div class="modal-body text-center">
+          <img src="/images/<%= product.imagen %>" alt="<%= product.nombre %>" class="img-fluid"
+               onerror="this.src='https://via.placeholder.com/800x600/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>'">
         </div>
       </div>
     </div>
@@ -271,27 +283,43 @@
 
   <!-- Scripts -->
   <script src="/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
   <script>
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    // Función para cerrar el menú móvil
+    function closeNavbar() {
+      const navbarCollapse = document.getElementById('navbarNav');
+      const navbar = document.querySelector('.navbar-collapse');
+      
+      if (navbar && navbar.classList.contains('show')) {
+        const bsCollapse = new bootstrap.Collapse(navbar, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      }
     }
 
-    requestAnimationFrame(raf);
+    // Cerrar menú al hacer clic en cualquier enlace de navegación
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+      
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          // Cerrar el menú después de un pequeño delay
+          setTimeout(closeNavbar, 100);
+        });
+      });
+
+      // Cerrar menú al hacer clic fuera de él
+      document.addEventListener('click', function(e) {
+        const navbar = document.querySelector('.navbar-collapse');
+        const toggler = document.querySelector('.navbar-toggler');
+        
+        if (navbar && navbar.classList.contains('show')) {
+          if (!navbar.contains(e.target) && !toggler.contains(e.target)) {
+            closeNavbar();
+          }
+        }
+      });
+    });
 
     // Quantity controls
     function changeQuantity(change) {
@@ -305,28 +333,27 @@
     }
 
     // Add to favorites
-    function addToFavorites() {
-      const btn = event.target.closest('button');
-      const icon = btn.querySelector('i');
+    function addToFavorites(button) {
+      const icon = button.querySelector('i');
       
       if (icon.classList.contains('far')) {
         icon.classList.remove('far');
         icon.classList.add('fas');
-        btn.classList.add('favorited');
+        button.classList.add('favorited');
       } else {
         icon.classList.remove('fas');
         icon.classList.add('far');
-        btn.classList.remove('favorited');
+        button.classList.remove('favorited');
       }
     }
 
     // Image zoom functionality
-    document.querySelector('.product-main-image').addEventListener('click', function() {
+    document.querySelector('.product-image-main').addEventListener('click', function() {
       const modal = new bootstrap.Modal(document.getElementById('imageModal'));
       modal.show();
     });
 
-    // Smooth animations on scroll
+    // Smooth animations on scroll (using Intersection Observer for better performance)
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -336,15 +363,16 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target); // Stop observing once animated
         }
       });
     }, observerOptions);
 
-    document.querySelectorAll('.product-info-container, .related-product-card').forEach(el => {
+    document.querySelectorAll('.product-info-container, .related-product-card, .product-image-container, .product-guarantees').forEach(el => {
       observer.observe(el);
     });
 
-    // Add animation classes
+    // Add animation classes on load for initial elements
     document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => {
         document.querySelector('.product-image-container').classList.add('animate-in');
