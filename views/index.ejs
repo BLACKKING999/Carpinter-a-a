@@ -132,8 +132,10 @@
             <% products.forEach(function(product) { %>
               <div class="product-card">
                 <div class="product-image">
-                  <img src="/assets/images/<%= product.imagen %>" 
-                       alt="<%= product.nombre %>" 
+                  <img src="/images/<%= product.imagen %>" 
+                   alt="<%= product.nombre %>" 
+                     class="img-fluid product-main-image"
+                      onerror="this.src='https://via.placeholder.com/600x450/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>'">
                        loading="lazy">
                   <div class="product-overlay">
                     <a href="/producto/<%= product.id %>" class="hero-btn btn-primary product-btn">
