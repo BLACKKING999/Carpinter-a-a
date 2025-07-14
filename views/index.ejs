@@ -116,24 +116,27 @@
     </div>
     
     <!-- DEBUG: Mostrar información de productos -->
+    <!-- EPIC PRODUCTOS - LISTADO -->
+<section class="products-section">
+  <div class="container">
     <div class="row">
-      <div class="col-12">
-        <p>Productos encontrados: <%= products ? products.length : 0 %></p>
+      <div class="col-12 text-center mb-4">
+        <p class="text-muted">Productos encontrados: <%= products ? products.length : 0 %></p>
       </div>
     </div>
-    
+
     <div class="row justify-content-center">
       <div class="col-12">
-        <% if (typeof products !== 'undefined' && products && products.length > 0) { %>
+        <% if (Array.isArray(products) && products.length > 0) { %>
           <div class="products-grid">
-            <% products.forEach(function(product, index) { %>
+            <% products.forEach(function(product) { %>
               <div class="product-card">
                 <div class="product-image">
-                  <img src="https://via.placeholder.com/350x280/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>" 
+                  <img src="/assets/images/<%= product.imagen %>" 
                        alt="<%= product.nombre %>" 
                        loading="lazy">
                   <div class="product-overlay">
-                    <a href="/producto/<%= product.id %>" class="btn btn-primary product-btn">
+                    <a href="/producto/<%= product.id %>" class="hero-btn btn-primary product-btn">
                       <i class="fas fa-eye"></i>
                       Ver Detalles
                     </a>
@@ -152,7 +155,6 @@
             <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
             <h3>No hay productos disponibles</h3>
             <p class="text-muted">Los productos no se pudieron cargar.</p>
-            <p class="text-muted">Productos variable: <%= typeof products %></p>
           </div>
         <% } %>
       </div>
