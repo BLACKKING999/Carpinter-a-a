@@ -1033,7 +1033,17 @@ body {
     height: 70px;
     font-size: 1.8rem;
   }
-
+.product-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #fff;
+  display: block; /* Asegúrate que esté visible */
+}
   .form-control {
     padding: 1rem;
   }
