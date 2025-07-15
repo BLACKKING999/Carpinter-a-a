@@ -256,38 +256,119 @@ body {
    botones generales 
 -------------------------------- */
 
-.btn-primary {
-  background-color: var(--turquesa);
-  border-color: var(--turquesa-oscuro);
-  color: #ffffff;
-  font-weight: 600;
+.btn-primary, .btn, .product-btn {
+  background: var(--turquesa);
+  color: #fff;
+  border: none;
   border-radius: 2rem;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
-  transition: background 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,191,165,0.18);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
 }
-
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: var(--turquesa-oscuro);
-  transform: translateY(-2px);
-  color: #ffffff;
+.btn-primary:hover, .btn:hover, .product-btn:hover {
+  background: var(--turquesa-oscuro);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
 }
-
 .btn-outline-light {
   border: 2px solid var(--turquesa-claro);
   color: var(--turquesa-claro);
   background: transparent;
   border-radius: 2rem;
-  padding: 0.75rem 1.5rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
-
 .btn-outline-light:hover {
-  background-color: var(--turquesa);
-  color: #ffffff;
-  transform: translateY(-2px);
+  background: var(--turquesa);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.product-card {
+  background: #181f1f;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0,191,165,0.10);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s cubic-bezier(.4,2,.6,1);
+  min-height: 420px;
+}
+.product-card:hover {
+  box-shadow: 0 8px 32px rgba(0,191,165,0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+.product-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.2rem 1.2rem 0 0;
+  min-height: 220px;
+  background: #101010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 1.2rem 1.2rem 0 0;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+}
+.product-image:hover img {
+  transform: scale(1.05);
+}
+.product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, rgba(0,191,165,0.7), rgba(0,142,118,0.85));
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem 1.2rem 0 0;
+  transition: opacity 0.4s;
+  z-index: 2;
+}
+.product-image:hover .product-overlay,
+.product-card:focus-within .product-overlay {
+  opacity: 1;
+}
+.product-btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  background: var(--turquesa);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,191,165,0.18);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  z-index: 3;
+}
+.product-btn:focus {
+  outline: 2px solid var(--turquesa-claro);
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .product-card {
+    min-height: 340px;
+  }
+  .product-image img {
+    height: 180px;
+  }
 }
 /* -------------------------------
    hero section
@@ -466,3 +547,26 @@ body {
 /* -------------------------------
    hero section
 -------------------------------- */
+
+.hero-btn, .btn-primary, .btn, .btn-lg, .btn-outline-light {
+  background: var(--turquesa) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,191,165,0.18);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+.hero-btn:hover, .btn-primary:hover, .btn:hover, .btn-lg:hover, .btn-outline-light:hover {
+  background: var(--turquesa-oscuro) !important;
+  color: #fff !important;
+  transform: translateY(-2px) scale(1.04);
+}
+.navbar-nav .nav-link, .navbar-brand {
+  color: var(--turquesa-claro) !important;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+.navbar-nav .nav-link:hover, .navbar-brand:hover {
+  color: var(--turquesa) !important;
+}

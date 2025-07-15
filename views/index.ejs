@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Lenis CSS recomendado -->
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.4/dist/lenis.css">
+  <style>
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -56,11 +64,11 @@
           diseñada especialmente para tu hogar con la más alta calidad artesanal.
         </p>
         <div class="hero-buttons">
-          <a href="#productos" class="btn btn-primary btn-lg hero-btn">
+          <a href="#productos" class="hero-btn btn-primary btn-lg" id="btn-ver-productos">
             <i class="fas fa-eye"></i>
             Ver Productos
           </a>
-          <a href="#contacto" class="btn btn-outline-light btn-lg hero-btn">
+          <a href="#contacto" class="hero-btn btn-primary btn-lg" id="btn-contactar">
             <i class="fas fa-phone"></i>
             Contactar
           </a>
@@ -123,7 +131,7 @@
         <% if (Array.isArray(products) && products.length > 0) { %>
           <div class="products-grid">
             <% products.forEach(function(product) { %>
-              <div class="product-card">
+              <div class="product-card" tabindex="0">
                 <div class="product-image">
                   <img src="/images/<%= product.imagen %>" 
                    alt="<%= product.nombre %>" 
@@ -131,7 +139,7 @@
                       onerror="this.src='https://via.placeholder.com/600x450/dc2626/ffffff?text=<%= encodeURIComponent(product.nombre) %>'">
                        loading="lazy">
                   <div class="product-overlay">
-                    <a href="/producto/<%= product.id %>" class="hero-btn btn-primary product-btn">
+                    <a href="/producto/<%= product.id %>" class="product-btn" tabindex="0">
                       <i class="fas fa-eye"></i>
                       Ver Detalles
                     </a>
@@ -141,6 +149,8 @@
                   <h3 class="product-name"><%= product.nombre %></h3>
                   <p class="product-description"><%= product.descripcion %></p>
                   <div class="product-price"><%= product.precio %></div>
+                  <!-- Botón visible siempre en móvil -->
+                  <a href="/producto/<%= product.id %>" class="product-btn d-block d-md-none mt-2" style="width:100%;text-align:center;">Ver Detalles</a>
                 </div>
               </div>
             <% }); %>
@@ -254,7 +264,7 @@
               <div class="form-group">
                 <textarea class="form-control" rows="5" placeholder="Mensaje" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg">
+              <button type="submit" class="btn btn-primary btn-lg" id="btn-enviar-mensaje">
                 <i class="fas fa-paper-plane"></i>
                 Enviar Mensaje
               </button>
@@ -293,6 +303,11 @@
 
   <!-- Scripts -->
 <script src="/bootstrap.bundle.min.js"></script>
+<!-- Lenis, GSAP y plugins -->
+<script src="https://unpkg.com/lenis@1.3.4/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://assets.codepen.io/16327/ScrollSmoother.min.js"></script>
 <script>
   // Función para cerrar el menú móvil
   function closeNavbar() {
@@ -363,6 +378,54 @@
       alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
     });
   }
+
+  // Inicializar Lenis y GSAP ScrollTrigger
+  document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar Lenis
+    const lenis = new Lenis({
+      lerp: 0.07,
+      wheelMultiplier: 1,
+      smoothWheel: true,
+      smoothTouch: false,
+      anchors: true
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    // Sincronizar Lenis con GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+    // Animaciones de entrada con GSAP
+    gsap.utils.toArray('.section-title, .section-subtitle, .product-card, .feature-card, .about-content, .about-image, .contact-section, .footer, #btn-ver-productos, #btn-contactar, #btn-enviar-mensaje').forEach(el => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 60,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+    // Animación especial para el hero
+    gsap.from('.hero-title, .hero-description, .hero-buttons', {
+      opacity: 0,
+      y: 40,
+      duration: 1.2,
+      stagger: 0.2,
+      ease: 'power3.out',
+      delay: 0.2
+    });
+    // Eliminar scroll suave nativo
+    // (Ya no es necesario el scrollIntoView nativo, lo maneja Lenis)
+  });
 </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 </body>
